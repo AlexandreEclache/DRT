@@ -169,6 +169,37 @@
     margin: 0 auto 20px auto;
 }
 
+.result-content {
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-left {
+    flex: 1;
+}
+
+.result-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qr-code {
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+.qr-message {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
     </style>
 </head>
 <body>
@@ -181,17 +212,31 @@
             <button class="btn-continue" onclick="startTest()">Monter dans le train !</button>
         </div>
 
-        <!-- Pages de questions -->
-        <div id="questionsContainer"></div>
+<!-- Pages de questions -->
+<div id="questionsContainer"></div>
 
-        <!-- Page de résultat -->
-        <div class="result-page" id="resultPage">
+<!-- Page de résultat -->
+<div class="result-page" id="resultPage">
+
+    <div class="result-content">
+
+        <!-- PARTIE GAUCHE -->
+        <div class="result-left">
             <h1 class="result-title">Résultats</h1>
             <p class="result-message" id="resultMessage"></p>
             <div class="faction-logo" id="factionLogo"></div>
-            <button class="btn-restart" onclick="restartTest()">Recommencer</button>
+            <button class="btn-restart" onclick=  "restartTest()">Recommencer</button>
         </div>
+
+        <!-- PARTIE DROITE -->
+        <div class="result-right">
+            <img src="QR.Code.DRT.png" alt="QR Code DRT" class="qr-code">
+            <p class="qr-message" id="qrMessage"></p>
+        </div>
+
     </div>
+</div>
+
 
     <script>
         const questions = [
@@ -386,12 +431,37 @@
             }
             
             const faction = factions[resultFaction];
+
+            let adjective = "";
+
+switch (resultFaction) {
+    case "A":
+        adjective = "audacieux";
+        break;
+    case "B":
+        adjective = "fraternel";
+        break;
+    case "C":
+        adjective = "altruiste";
+        break;
+    case "D":
+        adjective = "érudit";
+        break;
+    case "E":
+        adjective = "sincère";
+        break;
+}
+
+document.getElementById("qrMessage").innerHTML =
+    `Et si tu peux scanner ce QR code pour nous aider, ce serait vraiment ${adjective} ;)`;
+
             
             document.getElementById("questionsContainer").innerHTML = "";
             document.getElementById("resultMessage").innerHTML = faction.message;
             document.getElementById("factionLogo").innerHTML = faction.emoji;
             document.getElementById("resultPage").classList.add("active");
         }
+
 
         function restartTest() {
             currentQuestion = 0;
