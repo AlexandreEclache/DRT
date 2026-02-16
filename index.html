@@ -199,6 +199,20 @@
     line-height: 1.5;
 }
 
+.faction-img {
+    width: 140px;
+    height: auto;
+}
+
+.faction-img {
+    width: 160px;
+    transition: transform 0.3s ease;
+}
+
+.faction-img:hover {
+    transform: scale(1.05);
+}
+
 
     </style>
 </head>
@@ -225,7 +239,7 @@
             <h1 class="result-title">Résultats</h1>
             <p class="result-message" id="resultMessage"></p>
             <div class="faction-logo" id="factionLogo"></div>
-            <button class="btn-restart" onclick=  "restartTest()">Recommencer</button>
+            <button class="btn-restart" onclick="restartTest()">Recommencer</button>
         </div>
 
         <!-- PARTIE DROITE -->
@@ -345,27 +359,27 @@
         const factions = {
             A: {
                 name: "Audacieux",
-                emoji: "🔥",
+                image: "audacieux.png",
                 message: "Félicitations !! <br><br>  Comme nos listeux Virgile, Anna et Hugo, tu es membre de la faction des AUDACIEUX ! <br><br> Maintenant, va voir les DRT et demande leur de t'inscrire dans leur base de données des Divergents ! <br><br> Les Audacieux incarnent le courage sous toutes ses formes : physique, morale et émotionnelle. Ils refusent la peur, la provoquent même, pour mieux la dominer. Protecteurs de la cité, ils valorisent l’action, la loyauté et la force intérieure. Chez eux, l’audace n’est pas une option : c’est une manière de vivre."
             },
             B: {
                 name: "Fraternels",
-                emoji: "🤝",
+                image: "fraternels.png",
                 message: "Félicitations !! <br><br>  Comme nos listeux Pierre, Zoé, Saralina et Kenny, tu es membre de la faction des FRATERNELS ! <br><br> Maintenant, va voir les DRT et demande leur de t'inscrire dans leur base de données des Divergents ! <br><br> Les Fraternels placent l’harmonie et la solidarité au centre de tout. Ils croient que la paix naît de la bienveillance, du partage et du soutien mutuel. Leur force réside dans l’unité et la coopération. Pour eux, la communauté passe toujours avant l’individu."
             },
             C: {
                 name: "Altruistes",
-                emoji: "🌳",
+                image: "altruiste.png",
                 message: "Félicitations !! <br><br>  Comme nos listeux Hermance, Apolline, Nathan et Chouchane tu es membre de la faction des ALTRUISTES ! <br><br> Maintenant, va voir les DRT et demande leur de t'inscrire dans leur base de données des Divergents ! <br><br> Les Altruistes vivent pour servir et protéger les autres. Ils placent le sacrifice et l’abnégation au cœur de leurs valeurs. Discrets mais déterminés, ils veillent au bien commun avant tout intérêt personnel. Pour eux, la véritable grandeur réside dans le don de soi."
             },
             D: {
                 name: "Érudits",
-                emoji: "👁️",
+                image: "érudit.png",
                 message: "Félicitations !! <br><br>  Comme nos listeux Aimée, Nathan, Emma et Evan, tu es membre de la faction des ÉRUDITS ! <br><br> Maintenant, va voir les DRT et demande leur de t'inscrire dans leur base de données des Divergents ! <br><br> Les Érudits considèrent le savoir comme la clé du progrès et de la stabilité. Curieux et analytiques, ils recherchent la compréhension avant l’action. Leur ambition est d’éclairer le monde par la logique et la connaissance. Pour eux, l’intelligence est la plus grande des forces."
             },
             E: {
                 name: "Sincères",
-                emoji: "⚖️",
+                image: "sincère.png",
                 message: "Félicitations !! <br><br>  Comme nos listeux Thomas, Julie, et nos deux Charlotte, tu es membre de la faction des SINCÈRES ! <br><br> Maintenant, va voir les DRT et demande leur de t'inscrire dans leur base de données des Divergents ! <br><br> Les Sincères défendent la vérité comme fondement d’une société juste. Ils rejettent le mensonge et valorisent la transparence, même lorsqu’elle dérange. Droits et directs, ils estiment que l’honnêteté libère et protège. Pour eux, seule la vérité permet la confiance."
             }
         };
@@ -458,7 +472,9 @@ document.getElementById("qrMessage").innerHTML =
             
             document.getElementById("questionsContainer").innerHTML = "";
             document.getElementById("resultMessage").innerHTML = faction.message;
-            document.getElementById("factionLogo").innerHTML = faction.emoji;
+            document.getElementById("factionLogo").innerHTML = 
+         `<img src="${faction.image}" alt="${faction.name}" class="faction-img">`;
+
             document.getElementById("resultPage").classList.add("active");
         }
 
